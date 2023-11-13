@@ -2,7 +2,7 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-internal class Program
+public class Program
 {
 	private static void Main(string[] args)
 	{
