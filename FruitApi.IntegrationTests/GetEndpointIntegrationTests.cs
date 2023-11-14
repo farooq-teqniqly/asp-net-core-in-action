@@ -28,7 +28,7 @@ namespace FruitApi.IntegrationTests
 		public async Task Get_When_Successful_Returns_All_Fruit()
 		{
 			var response = await client.GetAsync(Program.BaseRoute);
-			var fruits = await response.Content.ReadFromJsonAsync<FruitModel[]>();
+			var fruits = await client.ReadFromJsonAsync<FruitModel[]>(response);
 
 			fruits.Should().NotBeNull();
 			fruits.Length.Should().Be(2);

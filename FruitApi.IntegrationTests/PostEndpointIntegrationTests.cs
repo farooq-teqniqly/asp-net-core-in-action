@@ -41,7 +41,7 @@ namespace FruitApi.IntegrationTests
 		public async Task Post_When_Successful_Returns_Created_Fruit()
 		{
 			var response = await client.PostAsync(Program.BaseRoute, postRequestBody);
-			var fruit = await response.Content.ReadFromJsonAsync<FruitModel>();
+			var fruit = await client.ReadFromJsonAsync<FruitModel>(response);
 
 			fruit.Should().NotBeNull();
 			fruit.Id.Should().NotBeNull();

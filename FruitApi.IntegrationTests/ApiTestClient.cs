@@ -4,6 +4,7 @@
 
 namespace FruitApi.IntegrationTests
 {
+	using System.Net.Http.Json;
 	using System.Text;
 	using System.Text.Json;
 
@@ -21,6 +22,11 @@ namespace FruitApi.IntegrationTests
 		}
 
 		public async Task<HttpResponseMessage> GetAsync(string endpoint) => await client.GetAsync(endpoint);
+
+		public async Task<T> ReadFromJsonAsync<T>(HttpResponseMessage response)
+			=> await response.Content.ReadFromJsonAsync<T>()
+			   ?? throw new InvalidOperationException(
+				   $"Could not deserialize the result into the requested type {typeof(T)}");
 
 		public void Dispose() => client.Dispose();
 	}
