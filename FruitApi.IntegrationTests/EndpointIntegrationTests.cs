@@ -8,7 +8,6 @@ namespace FruitApi.IntegrationTests
 	using System.Net;
 	using System.Text;
 	using System.Text.Json;
-	using System.Text.Json.Serialization;
 
 	public class EndpointIntegrationTests : IClassFixture<CustomWebApplicationFactory>, IDisposable
 	{
@@ -30,6 +29,16 @@ namespace FruitApi.IntegrationTests
 			response.EnsureSuccessStatusCode();
 
 			response.StatusCode.Should().Be(HttpStatusCode.Created);
+		}
+
+		[Fact]
+		public async Task Can_Call_Hello_World_Endpoint()
+		{
+			var response = await client.GetAsync("/hello");
+			response.EnsureSuccessStatusCode();
+
+			var content = await response.Content.ReadAsStringAsync();
+			content.Should().Be("Hello World!");
 		}
 
 		public void Dispose() => client.Dispose();

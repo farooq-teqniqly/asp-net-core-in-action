@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineBuiltInBasic", "PipelineBuiltInBasic\PipelineBuiltInBasic.csproj", "{5E88E53C-6210-470A-83E8-28FC74A9515D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PipelineBuiltInBasic", "PipelineBuiltInBasic\PipelineBuiltInBasic.csproj", "{5E88E53C-6210-470A-83E8-28FC74A9515D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineBuiltInBasic.IntegrationTests", "PipelineBuiltInBasic.IntegrationTests\PipelineBuiltInBasic.IntegrationTests.csproj", "{44EACF5E-B2C0-49B6-8F25-E84C1647D0B0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FruitApi", "FruitApi\FruitApi.csproj", "{EDA9AB21-3BC5-462B-9734-6FE24DE95DAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FruitApi.IntegrationTests", "FruitApi.IntegrationTests\FruitApi.IntegrationTests.csproj", "{A498C107-2CAF-4B80-8A09-20A4F1C8DDFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PipelineBuiltInBasic.IntegrationTests", "PipelineBuiltInBasic.IntegrationTests\PipelineBuiltInBasic.IntegrationTests.csproj", "{44EACF5E-B2C0-49B6-8F25-E84C1647D0B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +21,6 @@ Global
 		{44EACF5E-B2C0-49B6-8F25-E84C1647D0B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44EACF5E-B2C0-49B6-8F25-E84C1647D0B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44EACF5E-B2C0-49B6-8F25-E84C1647D0B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDA9AB21-3BC5-462B-9734-6FE24DE95DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDA9AB21-3BC5-462B-9734-6FE24DE95DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDA9AB21-3BC5-462B-9734-6FE24DE95DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDA9AB21-3BC5-462B-9734-6FE24DE95DAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A498C107-2CAF-4B80-8A09-20A4F1C8DDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A498C107-2CAF-4B80-8A09-20A4F1C8DDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A498C107-2CAF-4B80-8A09-20A4F1C8DDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A498C107-2CAF-4B80-8A09-20A4F1C8DDFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

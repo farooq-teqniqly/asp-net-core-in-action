@@ -9,6 +9,10 @@ internal class Program
 		var builder = WebApplication.CreateBuilder(args);
 		var app = builder.Build();
 
+		app.UseRouting();
+
+		app.MapGet("/hello", () => "Hello World!");
+
 		app.MapPost("/fruit", (NewFruitModel model) =>
 		{
 			var id = Guid.NewGuid().ToString("N");
