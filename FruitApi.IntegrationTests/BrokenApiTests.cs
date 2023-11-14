@@ -11,39 +11,60 @@ namespace FruitApi.IntegrationTests
 	using Microsoft.Extensions.DependencyInjection.Extensions;
 	using Services;
 
-	public class BrokenApiTests : IClassFixture<CustomWebApplicationFactory>, IDisposable
+	public class BrokenApiTests : IClassFixture<CustomWebApplicationFactory>
 	{
-		private readonly ApiTestClient client;
+		private readonly CustomWebApplicationFactory fixture;
 
-		public BrokenApiTests(CustomWebApplicationFactory fixture)
+		public BrokenApiTests(CustomWebApplicationFactory fixture) => this.fixture = fixture;
+
+		[Fact]
+		public async Task When_Exception_Thrown_In_Dependency_In_Production_Response_Has_No_Content()
 		{
 			var customFactory = fixture.WithWebHostBuilder(b =>
 			{
 				b.UseEnvironment("Production");
-				
+
 				b.ConfigureTestServices(s =>
 				{
 					s.RemoveAll<IIdFactory>();
 					s.AddScoped<IIdFactory, BadIdFactory>();
 				});
 			});
-			
-			client = new ApiTestClient(customFactory.CreateClient());
-		}
 
-		[Fact]
-		public async Task When_Exception_Thrown_In_Dependency_In_Production_Response_Has_No_Content()
-		{
+			var client = new ApiTestClient(customFactory.CreateClient());
+
 			var postRequestBody = new { name = "Banana", Stock = 10 };
 			var response = await client.PostAsync(Program.BaseRoute, postRequestBody);
 
 			var content = await response.Content.ReadAsStringAsync();
-			
+
 			content.Should().BeEmpty();
 		}
-		
-		public void Dispose() => client.Dispose();
-		
+
+		[Fact]
+		public async Task When_Exception_Thrown_In_Dependency_In_Development_Response_Content_Has_Exception_Details()
+		{
+			var customFactory = fixture.WithWebHostBuilder(b =>
+			{
+				b.UseEnvironment("Development");
+
+				b.ConfigureTestServices(s =>
+				{
+					s.RemoveAll<IIdFactory>();
+					s.AddScoped<IIdFactory, BadIdFactory>();
+				});
+			});
+
+			var client = new ApiTestClient(customFactory.CreateClient());
+
+			var postRequestBody = new { name = "Banana", Stock = 10 };
+			var response = await client.PostAsync(Program.BaseRoute, postRequestBody);
+
+			var content = await response.Content.ReadAsStringAsync();
+
+			content.Should().Contain("System.NullReferenceException");
+		}
+
 		private class BadIdFactory : IIdFactory
 		{
 			public string CreateId() => throw new NullReferenceException();
