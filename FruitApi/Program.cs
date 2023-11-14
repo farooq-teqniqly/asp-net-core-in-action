@@ -5,6 +5,7 @@
 namespace FruitApi
 {
 	using FruitApi.Models;
+	using Services;
 
 	public class Program
 	{
@@ -28,9 +29,9 @@ namespace FruitApi
 				return TypedResults.Ok(fruits);
 			});
 
-			app.MapPost(BaseRoute, (NewFruitModel model) =>
+			app.MapPost(BaseRoute, (NewFruitModel model, IIdFactory idFactory) =>
 			{
-				var id = Guid.NewGuid().ToString("N");
+				var id = idFactory.CreateId();
 				return TypedResults.Created($"{BaseRoute}/{id}", new FruitModel(id, "Banana", 10));
 			});
 

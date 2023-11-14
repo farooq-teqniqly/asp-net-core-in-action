@@ -7,7 +7,6 @@ namespace FruitApi.IntegrationTests
 	using FluentAssertions;
 	using Models;
 	using System.Net;
-	using System.Net.Http.Json;
 
 	public class GetEndpointIntegrationTests : IClassFixture<CustomWebApplicationFactory>, IDisposable
 	{

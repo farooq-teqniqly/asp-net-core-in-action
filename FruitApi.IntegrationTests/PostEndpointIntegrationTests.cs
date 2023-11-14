@@ -8,16 +8,15 @@ namespace FruitApi.IntegrationTests
 	using Models;
 	using System;
 	using System.Net;
-	using System.Net.Http.Json;
 	using System.Threading.Tasks;
 
 	public class PostEndpointIntegrationTests : IClassFixture<CustomWebApplicationFactory>, IDisposable
 	{
+
 		private readonly ApiTestClient client;
 		private readonly object postRequestBody = new { name = "Banana", Stock = 10 };
 
-		public PostEndpointIntegrationTests(CustomWebApplicationFactory fixture)
-			=> client = new ApiTestClient(fixture.CreateClient());
+		public PostEndpointIntegrationTests(CustomWebApplicationFactory fixture) => client = new ApiTestClient(fixture.CreateClient());
 
 		[Fact]
 		public async Task Post_When_Successful_Returns_Created_Status_Code()
