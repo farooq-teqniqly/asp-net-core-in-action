@@ -12,6 +12,7 @@ namespace FruitApi.IntegrationTests
 	public class PostEndpointIntegrationTests : IClassFixture<CustomWebApplicationFactory>, IDisposable
 	{
 		private readonly ApiTestClient client;
+		private readonly object postRequestBody = new { name = "Banana", Stock = 10 };
 
 		public PostEndpointIntegrationTests(CustomWebApplicationFactory fixture)
 			=> client = new ApiTestClient(fixture.CreateClient());
@@ -19,9 +20,7 @@ namespace FruitApi.IntegrationTests
 		[Fact]
 		public async Task Post_When_Successful_Returns_Created_Status_Code()
 		{
-			var response = await client.PostAsync(
-				"/fruit",
-				new { name = "Banana", Stock = 10 });
+			var response = await client.PostAsync("/fruit", postRequestBody);
 
 			response.StatusCode.Should().Be(HttpStatusCode.Created);
 		}
@@ -29,11 +28,9 @@ namespace FruitApi.IntegrationTests
 		[Fact]
 		public async Task Post_When_Successful_Returns_Id_In_Location_Header()
 		{
-			var response = await client.PostAsync(
-				"/fruit",
-				new { name = "Banana", Stock = 10 });
-
+			var response = await client.PostAsync("/fruit", postRequestBody);
 			var location = response.Headers.Location;
+
 			location.Should().NotBeNull();
 			location.ToString().Split("/")[1].Length.Should().BeGreaterThan(1);
 		}

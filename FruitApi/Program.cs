@@ -10,13 +10,14 @@ public class Program
 	{
 		var builder = WebApplication.CreateBuilder(args);
 		var app = builder.Build();
+		const string baseRoute = "/fruit";
 
 		app.UseRouting();
 
-		app.MapPost("/fruit", (NewFruitModel model) =>
+		app.MapPost(baseRoute, (NewFruitModel model) =>
 		{
 			var id = Guid.NewGuid().ToString("N");
-			return TypedResults.Created($"/fruit/{id}", model);
+			return TypedResults.Created($"{baseRoute}/{id}", model);
 		});
 
 		app.Run();
