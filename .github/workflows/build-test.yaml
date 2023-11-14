@@ -39,6 +39,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: fruitApi
-          path: FruitApi/fruitApi/**
+          path: fruitApi/**
           if-no-files-found: error
     
