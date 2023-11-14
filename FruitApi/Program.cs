@@ -14,10 +14,21 @@ public class Program
 
 		app.UseRouting();
 
+		app.MapGet(baseRoute, () =>
+		{
+			var fruits = new FruitModel[]
+			{
+				new("ban", "Banana", 10), 
+				new("app", "Apple", 20)
+			};
+			
+			return TypedResults.Ok(fruits);
+		});
+
 		app.MapPost(baseRoute, (NewFruitModel model) =>
 		{
 			var id = Guid.NewGuid().ToString("N");
-			return TypedResults.Created($"{baseRoute}/{id}", model);
+			return TypedResults.Created($"{baseRoute}/{id}", new FruitModel(id, "Banana", 10));
 		});
 
 		app.Run();

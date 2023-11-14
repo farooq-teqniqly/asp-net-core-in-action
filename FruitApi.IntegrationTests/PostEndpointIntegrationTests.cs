@@ -5,8 +5,10 @@
 namespace FruitApi.IntegrationTests
 {
 	using FluentAssertions;
+	using Models;
 	using System;
 	using System.Net;
+	using System.Net.Http.Json;
 	using System.Threading.Tasks;
 
 	public class PostEndpointIntegrationTests : IClassFixture<CustomWebApplicationFactory>, IDisposable
@@ -33,6 +35,19 @@ namespace FruitApi.IntegrationTests
 
 			location.Should().NotBeNull();
 			location.ToString().Split("/")[1].Length.Should().BeGreaterThan(1);
+		}
+
+		[Fact]
+		public async Task Post_When_Successful_Returns_Created_Fruit()
+		{
+			var response = await client.PostAsync("/fruit", postRequestBody);
+			var fruit = await response.Content.ReadFromJsonAsync<FruitModel>();
+
+			fruit.Should().NotBeNull();
+			fruit.Id.Should().NotBeNull();
+			fruit.Name.Should().NotBeNull();
+			fruit.Stock.Should().BeGreaterThan(0);
+
 		}
 
 		public void Dispose() => client.Dispose();
