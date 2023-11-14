@@ -13,8 +13,8 @@ namespace FruitApi.IntegrationTests
 
 	public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 	{
-		protected override void ConfigureWebHost(IWebHostBuilder builder) =>
-			builder.ConfigureTestServices(s =>
+		protected override void ConfigureWebHost(IWebHostBuilder builder)
+			=> builder.ConfigureTestServices(s =>
 			{
 				s.RemoveAll<IIdFactory>();
 				s.AddScoped<IIdFactory, Fakes.FakeIdFactory>();
