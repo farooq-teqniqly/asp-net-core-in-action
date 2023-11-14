@@ -9,8 +9,14 @@ internal class Program
 		var builder = WebApplication.CreateBuilder(args);
 		var app = builder.Build();
 
-		app.MapGet("/", () => "Hello World!");
+		app.MapPost("/fruit", (NewFruitModel model) =>
+		{
+			var id = Guid.NewGuid().ToString("N");
+			return TypedResults.Created($"/fruit/{id}", model);
+		});
 
 		app.Run();
 	}
 }
+
+public record NewFruitModel(string Name, int Stock);
