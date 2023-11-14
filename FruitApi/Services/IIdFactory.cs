@@ -8,7 +8,7 @@ namespace FruitApi.Services
 	{
 		public string CreateId();
 	}
-	
+
 	public class IdFactory : IIdFactory
 	{
 		public string CreateId() => Guid.NewGuid().ToString("N");

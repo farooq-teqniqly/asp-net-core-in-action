@@ -31,7 +31,7 @@ namespace FruitApi
 			app.MapGet(BaseRoute, () =>
 			{
 				throw new NullReferenceException("Oops!");
-				
+
 				var fruits = new FruitModel[]
 				{
 				new("ban", "Banana", 10),
