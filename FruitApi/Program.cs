@@ -16,6 +16,7 @@ namespace FruitApi
 			var builder = WebApplication.CreateBuilder(args);
 
 			builder.Services.AddProblemDetails();
+			builder.Services.AddSingleton<IIdFactory, IdFactory>();
 
 			var app = builder.Build();
 
@@ -29,6 +30,8 @@ namespace FruitApi
 
 			app.MapGet(BaseRoute, () =>
 			{
+				throw new NullReferenceException("Oops!");
+				
 				var fruits = new FruitModel[]
 				{
 				new("ban", "Banana", 10),
