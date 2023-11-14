@@ -22,7 +22,7 @@ namespace FruitApi.IntegrationTests
 		[Fact]
 		public async Task Post_When_Successful_Returns_Created_Status_Code()
 		{
-			var response = await client.PostAsync("/fruit", postRequestBody);
+			var response = await client.PostAsync(Program.BaseRoute, postRequestBody);
 
 			response.StatusCode.Should().Be(HttpStatusCode.Created);
 		}
@@ -30,7 +30,7 @@ namespace FruitApi.IntegrationTests
 		[Fact]
 		public async Task Post_When_Successful_Returns_Id_In_Location_Header()
 		{
-			var response = await client.PostAsync("/fruit", postRequestBody);
+			var response = await client.PostAsync(Program.BaseRoute, postRequestBody);
 			var location = response.Headers.Location;
 
 			location.Should().NotBeNull();
@@ -40,7 +40,7 @@ namespace FruitApi.IntegrationTests
 		[Fact]
 		public async Task Post_When_Successful_Returns_Created_Fruit()
 		{
-			var response = await client.PostAsync("/fruit", postRequestBody);
+			var response = await client.PostAsync(Program.BaseRoute, postRequestBody);
 			var fruit = await response.Content.ReadFromJsonAsync<FruitModel>();
 
 			fruit.Should().NotBeNull();

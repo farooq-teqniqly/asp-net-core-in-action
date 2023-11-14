@@ -2,35 +2,39 @@
 // Copyright (c) Teqniqly. All rights reserved.
 // </copyright>
 
-using FruitApi.Models;
-
-public class Program
+namespace FruitApi
 {
-	private static void Main(string[] args)
+	using FruitApi.Models;
+
+	public class Program
 	{
-		var builder = WebApplication.CreateBuilder(args);
-		var app = builder.Build();
-		const string baseRoute = "/fruit";
+		public const string BaseRoute = "/fruit";
 
-		app.UseRouting();
-
-		app.MapGet(baseRoute, () =>
+		private static void Main(string[] args)
 		{
-			var fruits = new FruitModel[]
+			var builder = WebApplication.CreateBuilder(args);
+			var app = builder.Build();
+
+			app.UseRouting();
+
+			app.MapGet(BaseRoute, () =>
 			{
-				new("ban", "Banana", 10), 
+				var fruits = new FruitModel[]
+				{
+				new("ban", "Banana", 10),
 				new("app", "Apple", 20)
-			};
-			
-			return TypedResults.Ok(fruits);
-		});
+				};
 
-		app.MapPost(baseRoute, (NewFruitModel model) =>
-		{
-			var id = Guid.NewGuid().ToString("N");
-			return TypedResults.Created($"{baseRoute}/{id}", new FruitModel(id, "Banana", 10));
-		});
+				return TypedResults.Ok(fruits);
+			});
 
-		app.Run();
+			app.MapPost(BaseRoute, (NewFruitModel model) =>
+			{
+				var id = Guid.NewGuid().ToString("N");
+				return TypedResults.Created($"{BaseRoute}/{id}", new FruitModel(id, "Banana", 10));
+			});
+
+			app.Run();
+		}
 	}
 }
